@@ -2,8 +2,9 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/user");
 
+const AuthCheck = require("../middleware/AuthCheck");
 // Create a new user
-router.post("/", async (req, res) => {
+router.post("/", AuthCheck, async (req, res) => {
   try {
     const user = await User.create(req.body);
     res.json(user);
@@ -13,7 +14,7 @@ router.post("/", async (req, res) => {
 });
 
 // Get all users
-router.get("/", async (req, res) => {
+router.get("/", AuthCheck, async (req, res) => {
   try {
     const users = await User.findAll();
     res.json(users);
@@ -23,7 +24,7 @@ router.get("/", async (req, res) => {
 });
 
 // Get user by ID
-router.get("/:id", async (req, res) => {
+router.get("/:id", AuthCheck, async (req, res) => {
   try {
     const user = await User.findByPk(req.params.id);
     if (!user) {
@@ -37,7 +38,7 @@ router.get("/:id", async (req, res) => {
 });
 
 // Update user by ID
-router.put("/:id", async (req, res) => {
+router.put("/:id", AuthCheck, async (req, res) => {
   try {
     const [updatedRowsCount] = await User.update(req.body, {
       where: { id: req.params.id },
@@ -54,7 +55,7 @@ router.put("/:id", async (req, res) => {
 });
 
 // Delete user by ID
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", AuthCheck, async (req, res) => {
   try {
     const deletedRowsCount = await User.destroy({
       where: { id: req.params.id },
