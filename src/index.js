@@ -4,6 +4,7 @@ const express = require("express");
 
 const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/users");
+const vehicleRoutes = require("./routes/vehicle");
 
 const syncDbs = require("../src/sync-database");
 
@@ -13,6 +14,7 @@ app.use(express.json());
 
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
+app.use("/vehicles", vehicleRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
