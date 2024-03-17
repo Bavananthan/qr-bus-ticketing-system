@@ -3,6 +3,8 @@ const jwt = require("jsonwebtoken");
 module.exports = async (req, res, next) => {
   const token = req.header("auth-token");
 
+  // console.log("Token:", token);
+
   // CHECK IF Existence of TOKEN
   if (!token) {
     return res.status(401).json({
@@ -22,7 +24,7 @@ module.exports = async (req, res, next) => {
     return res.status(400).json({
       errors: [
         {
-          msg: "Invalid Token",
+          msg: error,
         },
       ],
     });
