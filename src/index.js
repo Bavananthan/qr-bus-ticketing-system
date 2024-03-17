@@ -5,6 +5,8 @@ const express = require("express");
 const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/users");
 
+const syncDbs = require("../src/sync-database");
+
 const app = express();
 
 app.use(express.json());
